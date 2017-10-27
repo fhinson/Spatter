@@ -1,0 +1,16 @@
+<ion-view view-title="Today's Games">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in games" type="item-text-wrap" href="#/tab/games/{{game.id}}">
+        <img ng-src="{{game | imgFormat}}">
+        <h2>{{game | gameFormat}}</h2>
+        <p>{{game.date | dateFormat}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(game)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
