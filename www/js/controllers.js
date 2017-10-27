@@ -1,6 +1,6 @@
 angular.module('spatter.controllers', [])
 
-.controller('GamesCtrl', function($scope, Games, $http) {
+.controller('GamesCtrl', function($scope, Games, $http, $rootScope) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -9,7 +9,7 @@ angular.module('spatter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  Games.all().then(function(response){
+  $rootScope.$on('gamesRetrieved', function(event, response){
     $scope.games = response;
   });
 

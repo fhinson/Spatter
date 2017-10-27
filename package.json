@@ -36,6 +36,9 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-compat": {}
-    }
+    },
+    "platforms": [
+      "ios"
+    ]
   }
 }

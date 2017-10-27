@@ -1,6 +1,6 @@
 angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', 'spatter.filters'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $http, $localstorage, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -13,6 +13,23 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    var getGames = function(){
+      return $http.get('http://spatter-api.herokuapp.com/todays_games')
+        .then(function(response) {
+          // response
+          return response.data;
+        }, function(response) {
+          // response
+          console.log(response);
+      });
+    }
+
+    getGames().then(function(response){
+      $localstorage.setObject('games', response);
+      $rootScope.$broadcast('gamesRetrieved', response);
+    })
+
   });
 })
 
