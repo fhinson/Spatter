@@ -1,13 +1,6 @@
 angular.module('spatter.controllers', [])
 
 .controller('GamesCtrl', function($scope, Games, $http, $rootScope) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
   $rootScope.$on('gamesRetrieved', function(event, response){
     $scope.games = response;
@@ -18,8 +11,54 @@ angular.module('spatter.controllers', [])
   };
 })
 
-.controller('GameDetailCtrl', function($scope, $stateParams, Games) {
+.controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, Games) {
   $scope.game = Games.get($stateParams.gameId);
+
+  $scope.hideTime = false;
+
+  var alternate,
+    isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
+
+  $scope.sendComment = function() {
+    var d = new Date();
+
+    $scope.comments.push({
+      user_id: $scope.userId,
+      comment: $scope.data.comment,
+      created_at: d
+    });
+
+    Games.addComment($stateParams.gameId, $scope.userId, $scope.data.comment);
+
+    delete $scope.data.comment;
+    $ionicScrollDelegate.scrollBottom(true);
+  };
+
+
+  $scope.inputUp = function() {
+    if (isIOS) $scope.data.keyboardHeight = 216;
+    $timeout(function() {
+      $ionicScrollDelegate.scrollBottom(true);
+    }, 300);
+
+  };
+
+  $scope.inputDown = function() {
+    if (isIOS) $scope.data.keyboardHeight = 0;
+    $ionicScrollDelegate.resize();
+  };
+
+  $scope.closeKeyboard = function() {
+    // cordova.plugins.Keyboard.close();
+  };
+
+
+  $scope.data = {};
+  $scope.userId = '1';
+  $scope.comments = [];
+  Games.getComments($stateParams.gameId).then(function(response){
+    $scope.comments = response;
+  });
 })
 
 .controller('AccountCtrl', function($scope) {

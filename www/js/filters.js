@@ -18,3 +18,10 @@ angular.module('spatter.filters', [])
     return moment(date).tz(myTimezone).format('ha z');
   }
 })
+
+.filter('timeFormat', function(){
+  return function(time){
+    var d = new Date(time);
+    return d.toLocaleTimeString().replace(/:\d+ /, ' ');
+  }
+})

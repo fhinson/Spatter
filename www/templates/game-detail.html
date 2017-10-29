@@ -1,6 +1,32 @@
 <ion-view view-title="{{game | gameFormat}}">
-  <ion-content class="padding">
-    <img ng-src="{{game | imgFormat}}" style="width: 64px; height: 64px">
-    <p>{{game.date | dateFormat}}</p>
-  </ion-content>
+  <ion-pane class="messaging-view">
+    <ion-content class="content-stable"
+                 on-swipe-left="hideTime = false"
+                 on-swipe-right="hideTime = true">
+
+      <div ng-repeat="comment in comments"
+           ng-class="{other: comment.userId != myId}"
+           class="comments">
+
+        <div class="comment">
+          <img class="comment-avatar" ng-src="img/defaults/1.svg"/>
+          <span class="comment-span">{{ comment.comment }}</span>
+        </div>
+
+        <div class="time">{{comment.created_at | timeFormat}}</div>
+
+
+      </div>
+
+    </ion-content>
+
+    <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
+      <label class="item-input-wrapper">
+        <input type="text" placeholder="Type your comment" on-return="sendComment(); closeKeyboard()" ng-model="data.comment" on-focus="inputUp()" on-blur="inputDown()" />
+      </label>
+      <button class="button button-clear" ng-click="sendComment()">
+        Send
+      </button>
+    </ion-footer-bar>
+  </ion-pane>
 </ion-view>
