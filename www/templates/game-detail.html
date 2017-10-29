@@ -9,13 +9,11 @@
            class="comments">
 
         <div class="comment">
-          <img class="comment-avatar" ng-src="img/defaults/1.svg"/>
-          <span class="comment-span">{{ comment.comment }}</span>
+          <img class="comment-avatar" ng-src="{{getUserAvatar(comment)}}"/>
+          <span class="comment-span" ng-style="{'background': getUserColor(comment)}">{{ comment.comment }}</span>
         </div>
 
         <div class="time">{{comment.created_at | timeFormat}}</div>
-
-
       </div>
 
     </ion-content>

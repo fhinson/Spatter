@@ -25,7 +25,7 @@ angular.module('spatter.services', [])
   var games = $localstorage.getObject('games');
 
   var addGameComment = function(gameId, userId, commentText){
-    return $http.post('http://spatter-api.dev/add_game_comment', {user_id: userId, game_id: gameId, comment_text: commentText})
+    return $http.post('http://spatter-api.herokuapp.com/add_game_comment', {user_id: userId, game_id: gameId, comment_text: commentText})
       .then(function(response) {
         // response
       }, function(response) {
@@ -36,7 +36,7 @@ angular.module('spatter.services', [])
 
   var getGameComments = function(gameId){
     return $http({
-      url: 'http://spatter-api.dev/get_game_comments',
+      url: 'http://spatter-api.herokuapp.com/get_game_comments',
       method: "GET",
       params: {game_id: gameId}
     }).then(function(response) {

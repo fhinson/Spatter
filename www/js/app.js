@@ -15,7 +15,7 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
     }
 
     var getGames = function(){
-      return $http.get('http://spatter-api.dev/todays_games')
+      return $http.get('http://spatter-api.herokuapp.com/todays_games')
         .then(function(response) {
           // response
           return response.data;

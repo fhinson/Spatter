@@ -19,6 +19,48 @@ angular.module('spatter.controllers', [])
   var alternate,
     isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
 
+  var commenterColors = [
+    "#E74C3C",
+    "#9B59B6",
+    "#2980B9",
+    "#E67E22",
+    "#2ECC71",
+    "#F39C12",
+    "#16A085",
+    "#F30DFF",
+    "#2C3E50",
+    "#27AE60",
+    "#3498DB",
+    "#C0392B",
+    "#D35400",
+    "#F1C40F",
+    "#1ABC9C",
+    "#34495E",
+    "#8E44AD",
+  ];
+
+  // $scope.getUserIndex = function(comment){
+  //   var userIds = $scope.comments.map(a => a.user_id);
+  //   var presentUserId = comment.user_id;
+  //   var userIndex = userIds.indexOf(presentUserId);
+  // }
+
+  $scope.getUserAvatar = function(comment){
+    var userIds = $scope.comments.map(a => a.user_id);
+    var presentUserId = comment.user_id;
+    var userIndex = userIds.indexOf(presentUserId);
+    var userAvatar = "img/defaults/" + (userIndex+1).toString() + ".svg";
+    return userAvatar;
+  }
+
+  $scope.getUserColor = function(comment){
+    var userIds = $scope.comments.map(a => a.user_id);
+    var presentUserId = comment.user_id;
+    var userIndex = userIds.indexOf(presentUserId);
+    var userColor = commenterColors[userIndex];
+    return userColor;
+  }
+
   $scope.sendComment = function() {
     var d = new Date();
 
@@ -54,7 +96,7 @@ angular.module('spatter.controllers', [])
 
 
   $scope.data = {};
-  $scope.userId = '1';
+  $scope.userId = '2';
   $scope.comments = [];
   Games.getComments($stateParams.gameId).then(function(response){
     $scope.comments = response;
