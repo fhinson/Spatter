@@ -1,6 +1,6 @@
 angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', 'spatter.filters', 'spatter.directives'])
 
-.run(function($ionicPlatform, $http, $localstorage, $rootScope) {
+.run(function($ionicPlatform, $http, $localstorage, $rootScope, ServerUrl, Users) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,8 +14,13 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
       StatusBar.styleDefault();
     }
 
+    Users.getUser(1).then(function(response){
+      $localstorage.setObject('user', response);
+      $rootScope.$broadcast('userRetrieved', response);
+    });
+
     var getGames = function(){
-      return $http.get('http://spatter-api.herokuapp.com/todays_games')
+      return $http.get(ServerUrl + '/todays_games')
         .then(function(response) {
           // response
           return response.data;
@@ -32,6 +37,8 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
 
   });
 })
+
+.constant('ServerUrl', 'http://spatter-api.dev')
 
 .config(function($stateProvider, $urlRouterProvider) {
 

@@ -1,9 +1,13 @@
 angular.module('spatter.controllers', [])
 
-.controller('GamesCtrl', function($scope, Games, $http, $rootScope) {
+.controller('GamesCtrl', function($scope, Games, $rootScope) {
 
   $rootScope.$on('gamesRetrieved', function(event, response){
     $scope.games = response;
+  });
+
+  $rootScope.$on('userRetrieved', function(event, response){
+    $scope.user = response;
   });
 
   $scope.remove = function(game) {
@@ -11,8 +15,9 @@ angular.module('spatter.controllers', [])
   };
 })
 
-.controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, Games) {
+.controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, $rootScope, Users, Games) {
   $scope.game = Games.get($stateParams.gameId);
+  $scope.user = Users.get();
 
   $scope.hideTime = false;
 
@@ -58,38 +63,87 @@ angular.module('spatter.controllers', [])
   $scope.sendComment = function() {
     var d = new Date();
 
-    $scope.comments.push({
+    $scope.tempComment = {
       user_id: $scope.user.id,
       comment: $scope.data.comment,
       upvotes: 0,
       downvotes: 0,
       created_at: d
-    });
+    };
 
-    Games.addComment($stateParams.gameId, $scope.user.id, $scope.data.comment);
+    $scope.comments.push($scope.tempComment);
+
+    Games.addComment($stateParams.gameId, $scope.user.id, $scope.data.comment).then(function(response){
+      $scope.tempComment.id = response;
+    });
 
     delete $scope.data.comment;
     $ionicScrollDelegate.scrollBottom(true);
   };
 
   $scope.upvoteComment = function(comment){
-    comment.upvotes++;
-    $scope.user.upvoted_comments.push(comment.id);
-    console.log($scope.user.upvoted_comments);
-    Games.upvoteComment($stateParams.gameId, comment.user_id, comment.comment);
+    if($scope.isUpvoted(comment)){
+      $scope.unUpvoteComment(comment);
+    }
+    else{
+      if($scope.isDownvoted(comment)){
+        $scope.unDownvoteComment(comment);
+      }
+      comment.upvotes++;
+      if($scope.user.upvoted_comments == null){
+        $scope.user.upvoted_comments = [comment.id];
+      }
+      else{
+        $scope.user.upvoted_comments.push(comment.id);
+      }
+      Games.upvoteComment(comment, $scope.user);
+    }
   }
 
   $scope.downvoteComment = function(comment){
-    comment.downvotes++;
-    $scope.user.downvoted_comments.push(comment.id);
-    Games.downvoteComment($stateParams.gameId, comment.user_id, comment.comment);
+    if($scope.isDownvoted(comment)){
+      $scope.unDownvoteComment(comment);
+    }
+    else{
+      if($scope.isUpvoted(comment)){
+        $scope.unUpvoteComment(comment);
+      }
+      comment.downvotes++;
+      if($scope.user.downvoted_comments == null){
+        $scope.user.downvoted_comments = [comment.id];
+      }
+      else{
+        $scope.user.downvoted_comments.push(comment.id);
+      }
+      Games.downvoteComment(comment, $scope.user);
+    }
+  }
+
+  $scope.unUpvoteComment = function(comment){
+    comment.upvotes--;
+    var index = $scope.user.upvoted_comments.indexOf(comment.id);
+    if (index > -1) {
+      $scope.user.upvoted_comments.splice(index, 1);
+    }
+    Games.unUpvoteComment(comment, $scope.user);
+  }
+
+  $scope.unDownvoteComment = function(comment){
+    comment.downvotes--;
+    var index = $scope.user.downvoted_comments.indexOf(comment.id);
+    if (index > -1) {
+      $scope.user.downvoted_comments.splice(index, 1);
+    }
+    Games.unDownvoteComment(comment, $scope.user);
   }
 
   $scope.isUpvoted = function(comment){
+    if($scope.user.upvoted_comments == null) return "";
     return $scope.user.upvoted_comments.indexOf(comment.id) !== -1 ? "upvoted" : "";
   }
 
   $scope.isDownvoted = function(comment){
+    if($scope.user.downvoted_comments == null) return "";
     return $scope.user.downvoted_comments.indexOf(comment.id) !== -1 ? "downvoted" : "";
   }
 
@@ -113,12 +167,8 @@ angular.module('spatter.controllers', [])
 
 
   $scope.data = {};
-  $scope.user = {
-    id: '1',
-    upvoted_comments: [],
-    downvoted_comments: [],
-  }
   $scope.comments = [];
+  $scope.tempComment = {};
   Games.getComments($stateParams.gameId).then(function(response){
     $scope.comments = response;
     $ionicScrollDelegate.scrollBottom(true);

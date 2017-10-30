@@ -20,14 +20,41 @@ angular.module('spatter.services', [])
   }
 }])
 
-.factory('Games', function($http, $localstorage) {
+.factory('Users', function($http, ServerUrl, $localstorage){
+  var getUser = function(userId){
+    return $http({
+      url: ServerUrl + '/get_user',
+      method: "GET",
+      params: {user_id: userId}
+    }).then(function(response) {
+        // response
+        // console.log(response.data);
+        return response.data;
+      }, function(response) {
+        // response
+        console.log(response);
+    });
+  }
+
+  return{
+    getUser: function(userId){
+      return getUser(userId);
+    },
+    get: function(){
+      return $localstorage.getObject('user');
+    }
+  }
+})
+
+.factory('Games', function($http, $localstorage, ServerUrl) {
 
   var games = $localstorage.getObject('games');
 
   var addGameComment = function(gameId, userId, commentText){
-    return $http.post('http://spatter-api.herokuapp.com/add_game_comment', {user_id: userId, game_id: gameId, comment_text: commentText})
+    return $http.post(ServerUrl + '/add_game_comment', {user_id: userId, game_id: gameId, comment_text: commentText})
       .then(function(response) {
         // response
+        return response.data;
       }, function(response) {
         // response
         console.log(response);
@@ -36,7 +63,7 @@ angular.module('spatter.services', [])
 
   var getGameComments = function(gameId){
     return $http({
-      url: 'http://spatter-api.herokuapp.com/get_game_comments',
+      url: ServerUrl + '/get_game_comments',
       method: "GET",
       params: {game_id: gameId}
     }).then(function(response) {
@@ -49,8 +76,8 @@ angular.module('spatter.services', [])
     });
   }
 
-  var upvoteGameComment = function(gameId, userId, commentText){
-    return $http.post('http://spatter-api.herokuapp.com/upvote_comment', {user_id: userId, game_id: gameId, comment: commentText})
+  var upvoteGameComment = function(comment, user){
+    return $http.post(ServerUrl + '/upvote_comment', {comment_id: comment.id, user_id: user.id})
       .then(function(response) {
         // response
       }, function(response) {
@@ -59,8 +86,28 @@ angular.module('spatter.services', [])
     });
   }
 
-  var downvoteGameComment = function(gameId, userId, commentText){
-    return $http.post('http://spatter-api.herokuapp.com/downvote_comment', {user_id: userId, game_id: gameId, comment: commentText})
+  var downvoteGameComment = function(comment, user){
+    return $http.post(ServerUrl + '/downvote_comment', {comment_id: comment.id, user_id: user.id})
+      .then(function(response) {
+        // response
+      }, function(response) {
+        // response
+        console.log(response);
+    });
+  }
+
+  var unUpvoteGameComment = function(comment, user){
+    return $http.post(ServerUrl + '/un_upvote_comment', {comment_id: comment.id, user_id: user.id})
+      .then(function(response) {
+        // response
+      }, function(response) {
+        // response
+        console.log(response);
+    });
+  }
+
+  var unDownvoteGameComment = function(comment, user){
+    return $http.post(ServerUrl + '/un_downvote_comment', {comment_id: comment.id, user_id: user.id})
       .then(function(response) {
         // response
       }, function(response) {
@@ -74,16 +121,22 @@ angular.module('spatter.services', [])
       return games;
     },
     addComment: function(gameId, userId, commentText){
-      addGameComment(gameId, userId, commentText);
+      return addGameComment(gameId, userId, commentText);
     },
     getComments: function(gameId){
       return getGameComments(gameId);
     },
-    upvoteComment: function(gameId, userId, commentText){
-      return upvoteGameComment(gameId, userId, commentText);
+    upvoteComment: function(comment, user){
+      return upvoteGameComment(comment, user);
     },
-    downvoteComment: function(gameId, userId, commentText){
-      return downvoteGameComment(gameId, userId, commentText);
+    downvoteComment: function(comment, user){
+      return downvoteGameComment(comment, user);
+    },
+    unUpvoteComment: function(comment, user){
+      return unUpvoteGameComment(comment, user);
+    },
+    unDownvoteComment: function(comment, user){
+      return unDownvoteGameComment(comment, user);
     },
     remove: function(game) {
       games.splice(games.indexOf(game), 1);

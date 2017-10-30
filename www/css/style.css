@@ -101,14 +101,18 @@ img.comment-avatar{
   min-width: 40px;
 }
 
+.vote-button:active{
+  border:none!important;
+}
+
 .vote-button.upvoted{
   background: #2ECC71;
-  color: white;
+  color: white!important;
 }
 
 .vote-button.downvoted{
   background: #EF4836;
-  color:white;
+  color:white!important;
 }
 
 .tally{
