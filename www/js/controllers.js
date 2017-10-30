@@ -39,12 +39,6 @@ angular.module('spatter.controllers', [])
     "#8E44AD",
   ];
 
-  // $scope.getUserIndex = function(comment){
-  //   var userIds = $scope.comments.map(a => a.user_id);
-  //   var presentUserId = comment.user_id;
-  //   var userIndex = userIds.indexOf(presentUserId);
-  // }
-
   $scope.getUserAvatar = function(comment){
     var userIds = $scope.comments.map(a => a.user_id);
     var presentUserId = comment.user_id;
@@ -65,16 +59,39 @@ angular.module('spatter.controllers', [])
     var d = new Date();
 
     $scope.comments.push({
-      user_id: $scope.userId,
+      user_id: $scope.user.id,
       comment: $scope.data.comment,
+      upvotes: 0,
+      downvotes: 0,
       created_at: d
     });
 
-    Games.addComment($stateParams.gameId, $scope.userId, $scope.data.comment);
+    Games.addComment($stateParams.gameId, $scope.user.id, $scope.data.comment);
 
     delete $scope.data.comment;
     $ionicScrollDelegate.scrollBottom(true);
   };
+
+  $scope.upvoteComment = function(comment){
+    comment.upvotes++;
+    $scope.user.upvoted_comments.push(comment.id);
+    console.log($scope.user.upvoted_comments);
+    Games.upvoteComment($stateParams.gameId, comment.user_id, comment.comment);
+  }
+
+  $scope.downvoteComment = function(comment){
+    comment.downvotes++;
+    $scope.user.downvoted_comments.push(comment.id);
+    Games.downvoteComment($stateParams.gameId, comment.user_id, comment.comment);
+  }
+
+  $scope.isUpvoted = function(comment){
+    return $scope.user.upvoted_comments.indexOf(comment.id) !== -1 ? "upvoted" : "";
+  }
+
+  $scope.isDownvoted = function(comment){
+    return $scope.user.downvoted_comments.indexOf(comment.id) !== -1 ? "downvoted" : "";
+  }
 
 
   $scope.inputUp = function() {
@@ -96,10 +113,15 @@ angular.module('spatter.controllers', [])
 
 
   $scope.data = {};
-  $scope.userId = '2';
+  $scope.user = {
+    id: '1',
+    upvoted_comments: [],
+    downvoted_comments: [],
+  }
   $scope.comments = [];
   Games.getComments($stateParams.gameId).then(function(response){
     $scope.comments = response;
+    $ionicScrollDelegate.scrollBottom(true);
   });
 })
 

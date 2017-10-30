@@ -49,6 +49,26 @@ angular.module('spatter.services', [])
     });
   }
 
+  var upvoteGameComment = function(gameId, userId, commentText){
+    return $http.post('http://spatter-api.herokuapp.com/upvote_comment', {user_id: userId, game_id: gameId, comment: commentText})
+      .then(function(response) {
+        // response
+      }, function(response) {
+        // response
+        console.log(response);
+    });
+  }
+
+  var downvoteGameComment = function(gameId, userId, commentText){
+    return $http.post('http://spatter-api.herokuapp.com/downvote_comment', {user_id: userId, game_id: gameId, comment: commentText})
+      .then(function(response) {
+        // response
+      }, function(response) {
+        // response
+        console.log(response);
+    });
+  }
+
   return {
     all: function(){
       return games;
@@ -58,6 +78,12 @@ angular.module('spatter.services', [])
     },
     getComments: function(gameId){
       return getGameComments(gameId);
+    },
+    upvoteComment: function(gameId, userId, commentText){
+      return upvoteGameComment(gameId, userId, commentText);
+    },
+    downvoteComment: function(gameId, userId, commentText){
+      return downvoteGameComment(gameId, userId, commentText);
     },
     remove: function(game) {
       games.splice(games.indexOf(game), 1);

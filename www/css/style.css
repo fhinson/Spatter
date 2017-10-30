@@ -89,3 +89,31 @@ img.comment-avatar{
   margin-right:5px;
 }
 
+.actions{
+  margin-left: 35px;
+  margin-top: 5px;
+}
+
+.vote-button{
+  padding: 0px 5px;
+  min-height:20px;
+  line-height: 15px;
+  min-width: 40px;
+}
+
+.vote-button.upvoted{
+  background: #2ECC71;
+  color: white;
+}
+
+.vote-button.downvoted{
+  background: #EF4836;
+  color:white;
+}
+
+.tally{
+  display: inline-block;
+  font-weight: bold;
+  color: gray;
+}
+

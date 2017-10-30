@@ -11,6 +11,11 @@
         <div class="comment">
           <img class="comment-avatar" ng-src="{{getUserAvatar(comment)}}"/>
           <span class="comment-span" ng-style="{'background': getUserColor(comment)}">{{ comment.comment }}</span>
+          <div class="actions">
+            <button ng-click="upvoteComment(comment)" ng-class="isUpvoted(comment)" class="button button-stable vote-button"><icon class="ion-chevron-up"></button>
+              <p class="tally">{{comment.upvotes - comment.downvotes}}</p>
+            <button ng-click="downvoteComment(comment)" ng-class="isDownvoted(comment)" class="button button-stable vote-button"><icon class="ion-chevron-down"></button>
+          </div>
         </div>
 
         <div class="time">{{comment.created_at | timeFormat}}</div>
