@@ -50,6 +50,17 @@ angular.module('spatter.services', [])
 
   var games = $localstorage.getObject('games');
 
+  var getGames = function(){
+    return $http.get(ServerUrl + '/todays_games')
+      .then(function(response) {
+        // response
+        return response.data;
+      }, function(response) {
+        // response
+        console.log(response);
+    });
+  }
+
   var addGameComment = function(gameId, userId, commentText){
     return $http.post(ServerUrl + '/add_game_comment', {user_id: userId, game_id: gameId, comment_text: commentText})
       .then(function(response) {
@@ -119,6 +130,9 @@ angular.module('spatter.services', [])
   return {
     all: function(){
       return games;
+    },
+    getAll: function(){
+      return getGames();
     },
     addComment: function(gameId, userId, commentText){
       return addGameComment(gameId, userId, commentText);

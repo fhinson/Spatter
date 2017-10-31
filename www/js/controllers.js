@@ -1,6 +1,7 @@
 angular.module('spatter.controllers', [])
 
 .controller('GamesCtrl', function($scope, Games, $rootScope) {
+  $scope.games = Games.get();
 
   $rootScope.$on('gamesRetrieved', function(event, response){
     $scope.games = response;
@@ -17,7 +18,11 @@ angular.module('spatter.controllers', [])
 
 .controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, $rootScope, Users, Games) {
   $scope.game = Games.get($stateParams.gameId);
-  $scope.user = Users.get();
+  console.log($scope.game);
+  // $scope.user = Users.get();
+  Users.getUser(1).then(function(response){
+    $scope.user = response;
+  });
 
   $scope.hideTime = false;
 
@@ -175,7 +180,11 @@ angular.module('spatter.controllers', [])
   });
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, Users) {
+  Users.getUser(1).then(function(response){
+    $scope.user = response;
+  });
+
   $scope.settings = {
     enableFriends: true
   };

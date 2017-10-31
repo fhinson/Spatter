@@ -1,6 +1,6 @@
 angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', 'spatter.filters', 'spatter.directives'])
 
-.run(function($ionicPlatform, $http, $localstorage, $rootScope, ServerUrl, Users) {
+.run(function($ionicPlatform, $http, $localstorage, $rootScope, ServerUrl, Games, Users) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,18 +19,7 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
       $rootScope.$broadcast('userRetrieved', response);
     });
 
-    var getGames = function(){
-      return $http.get(ServerUrl + '/todays_games')
-        .then(function(response) {
-          // response
-          return response.data;
-        }, function(response) {
-          // response
-          console.log(response);
-      });
-    }
-
-    getGames().then(function(response){
+    Games.getAll().then(function(response){
       $localstorage.setObject('games', response);
       $rootScope.$broadcast('gamesRetrieved', response);
     })
