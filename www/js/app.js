@@ -37,45 +37,23 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
+  .state('games', {
+    url: '/games',
+    templateUrl: 'templates/tab-games.html',
+    controller: 'GamesCtrl'
   })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.games', {
-      url: '/games',
-      views: {
-        'tab-games': {
-          templateUrl: 'templates/tab-games.html',
-          controller: 'GamesCtrl'
-        }
-      }
-    })
-    .state('tab.game-detail', {
-      url: '/games/:gameId',
-      views: {
-        'tab-games': {
-          templateUrl: 'templates/game-detail.html',
-          controller: 'GameDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
+  .state('game-detail', {
+    url: '/games/:gameId',
+    templateUrl: 'templates/game-detail.html',
+    controller: 'GameDetailCtrl'
+  })
+  .state('account', {
     url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
+    templateUrl: 'templates/tab-account.html',
+    controller: 'AccountCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/games');
+  $urlRouterProvider.otherwise('/games');
 
 });
