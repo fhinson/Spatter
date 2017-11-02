@@ -127,6 +127,16 @@ angular.module('spatter.services', [])
     });
   }
 
+  var flagGameComment = function(comment, user){
+    return $http.post(ServerUrl + '/flag_comment', {comment_id: comment.id, user_id: user.id})
+      .then(function(response) {
+        // response
+      }, function(response) {
+        // response
+        console.log(response);
+    });
+  }
+
   return {
     all: function(){
       return games;
@@ -151,6 +161,9 @@ angular.module('spatter.services', [])
     },
     unDownvoteComment: function(comment, user){
       return unDownvoteGameComment(comment, user);
+    },
+    flagComment: function(comment, user){
+      return flagGameComment(comment, user);
     },
     remove: function(game) {
       games.splice(games.indexOf(game), 1);

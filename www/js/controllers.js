@@ -18,6 +18,12 @@ angular.module('spatter.controllers', [])
 
 .controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, $rootScope, Users, Games) {
   $scope.game = Games.get($stateParams.gameId);
+  // if($scope.game == null){
+  //   Games.getAll().then(function(response){
+  //     $localstorage.setObject('games', response);
+  //     $scope.game = Games.get($stateParams.gameId);
+  //   })
+  // }
   console.log($scope.game);
   // $scope.user = Users.get();
   Users.getUser(1).then(function(response){
@@ -150,6 +156,17 @@ angular.module('spatter.controllers', [])
   $scope.isDownvoted = function(comment){
     if($scope.user.downvoted_comments == null) return "";
     return $scope.user.downvoted_comments.indexOf(comment.id) !== -1 ? "downvoted" : "";
+  }
+
+  $scope.flagComment = function(comment){
+    comment.flags++;
+    if($scope.user.flagged_comments == null){
+      $scope.user.flagged_comments = [comment.id];
+    }
+    else{
+      $scope.user.flagged_comments.push(comment.id);
+    }
+    Games.flagComment(comment, $scope.user);
   }
 
 
