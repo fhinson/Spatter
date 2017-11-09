@@ -3,7 +3,14 @@
     <ion-content class="content-stable"
                  on-swipe-left="hideTime = false"
                  on-swipe-right="hideTime = true">
-
+      <div class="loading" ng-show="!commentsLoaded">
+        <ion-spinner></ion-spinner>
+        <p>Loading Comments</p>
+      </div>
+      <div class="empty-state" ng-show="noComments">
+        <icon class = "ion-android-warning"></icon>
+        <p>This game has no comments yet.</p>
+      </div>
       <div ng-repeat="comment in comments"
            ng-class="{other: comment.userId != myId}"
            class="comments">
@@ -18,8 +25,8 @@
           </div>
         </div>
 
-<!--         <div class="time">{{comment.created_at | timeFormat}}</div>
-        <button ng-click="flagComment(comment)" ng-class="isFlagged(comment)" class="button button-stable vote-button"><icon class="ion-flag"></button> -->
+        <div class="time">{{comment.created_at | timeFormat}}</div>
+        <button ng-click="flagComment(comment)" ng-class="isFlagged(comment)" class="button button-stable vote-button"><icon class="ion-flag"></button>
       </div>
 
     </ion-content>

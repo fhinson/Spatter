@@ -27,7 +27,7 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
   });
 })
 
-.constant('ServerUrl', 'http://spatter-api.herokuapp.com')
+.constant('ServerUrl', 'http://spatter-api.dev')
 
 .config(function($stateProvider, $urlRouterProvider) {
 

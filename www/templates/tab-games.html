@@ -1,6 +1,16 @@
 <ion-view view-title="Today's Games">
   <ion-content>
+    <ion-refresher on-refresh="doRefresh()">
+    </ion-refresher>
     <ion-list>
+      <div class="loading" ng-show="!gamesLoaded">
+        <ion-spinner></ion-spinner>
+        <p>Loading Games</p>
+      </div>
+      <div class="empty-state" ng-show="noGames">
+        <icon class = "ion-android-warning"></icon>
+        <p>There are no NBA Games today.</p>
+      </div>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="game in games" type="item-text-wrap" href="#/games/{{game.id}}">
         <img ng-src="{{game | imgFormat}}">
         <h2>{{game | gameFormat}}</h2>

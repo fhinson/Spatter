@@ -1,3 +1,28 @@
+.loading{
+  margin: 0px auto;
+  text-align: center;
+}
+
+.loading p{
+  font-size: 12px;
+  color: gray;
+}
+
+.empty-state{
+  margin: 0px auto;
+  text-align: center;
+}
+
+.empty-state p{
+  font-size: 12px;
+  color: gray;
+  text-align: center;
+}
+
+.empty-state icon{
+  color: gray;
+}
+
 .scroll {
   padding: 10px 0 50px !important;
 }
@@ -112,6 +137,11 @@ img.comment-avatar{
 
 .vote-button.downvoted{
   background: #EF4836;
+  color:white!important;
+}
+
+.vote-button.flagged{
+  background: red;
   color:white!important;
 }
 

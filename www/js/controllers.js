@@ -2,9 +2,15 @@ angular.module('spatter.controllers', [])
 
 .controller('GamesCtrl', function($scope, Games, $rootScope) {
   $scope.games = Games.get();
+  $scope.gamesLoaded = false;
+  $scope.noGames = false;
 
   $rootScope.$on('gamesRetrieved', function(event, response){
     $scope.games = response;
+    $scope.gamesLoaded = true;
+    if($scope.games.length == 0){
+      $scope.noGames = true;
+    }
   });
 
   $rootScope.$on('userRetrieved', function(event, response){
@@ -13,6 +19,14 @@ angular.module('spatter.controllers', [])
 
   $scope.remove = function(game) {
     Games.remove(game);
+  };
+
+  $scope.doRefresh = function() {
+    Games.getAll().then(function(response){
+      $localstorage.setObject('games', response);
+      $scope.games = response;
+      $scope.$broadcast('scroll.refreshComplete');
+    });
   };
 })
 
@@ -169,6 +183,11 @@ angular.module('spatter.controllers', [])
     Games.flagComment(comment, $scope.user);
   }
 
+  $scope.isFlagged = function(comment){
+    if($scope.user.flagged_comments == null) return "";
+    return $scope.user.flagged_comments.indexOf(comment.id) !== -1 ? "flagged" : "";
+  }
+
 
   $scope.inputUp = function() {
     if (isIOS) $scope.data.keyboardHeight = 216;
@@ -191,8 +210,14 @@ angular.module('spatter.controllers', [])
   $scope.data = {};
   $scope.comments = [];
   $scope.tempComment = {};
+  $scope.commentsLoaded = false;
+  $scope.noComments = false;
   Games.getComments($stateParams.gameId).then(function(response){
     $scope.comments = response;
+    $scope.commentsLoaded = true;
+    if($scope.comments.length == 0){
+      $scope.noComments = true;
+    }
     $ionicScrollDelegate.scrollBottom(true);
   });
 })
