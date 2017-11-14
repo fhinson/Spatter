@@ -1,4 +1,4 @@
-angular.module('spatter.filters', [])
+angular.module('spatter.filters')
 
 .filter('gameFormat', function(){
   return function(game){
@@ -24,4 +24,4 @@ angular.module('spatter.filters', [])
     var d = new Date(time);
     return d.toLocaleTimeString().replace(/:\d+ /, ' ');
   }
-})
+});

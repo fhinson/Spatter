@@ -1,4 +1,4 @@
-angular.module('spatter.directives', [])
+angular.module('spatter.directives')
 
 .directive('input', function($timeout) {
   return {
@@ -36,4 +36,4 @@ angular.module('spatter.directives', [])
       });
     }
   }
-})
+});

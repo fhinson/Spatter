@@ -1,43 +1,7 @@
-angular.module('spatter.controllers', [])
-
-.controller('GamesCtrl', function($scope, Games, $rootScope) {
-  $scope.games = Games.get();
-  $scope.gamesLoaded = false;
-  $scope.noGames = false;
-
-  $rootScope.$on('gamesRetrieved', function(event, response){
-    $scope.games = response;
-    $scope.gamesLoaded = true;
-    if($scope.games.length == 0){
-      $scope.noGames = true;
-    }
-  });
-
-  $rootScope.$on('userRetrieved', function(event, response){
-    $scope.user = response;
-  });
-
-  $scope.remove = function(game) {
-    Games.remove(game);
-  };
-
-  $scope.doRefresh = function() {
-    Games.getAll().then(function(response){
-      $localstorage.setObject('games', response);
-      $scope.games = response;
-      $scope.$broadcast('scroll.refreshComplete');
-    });
-  };
-})
+angular.module('spatter.controllers')
 
 .controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, $rootScope, Users, Games) {
   $scope.game = Games.get($stateParams.gameId);
-  // if($scope.game == null){
-  //   Games.getAll().then(function(response){
-  //     $localstorage.setObject('games', response);
-  //     $scope.game = Games.get($stateParams.gameId);
-  //   })
-  // }
   console.log($scope.game);
   // $scope.user = Users.get();
   Users.getUser(1).then(function(response){
@@ -220,14 +184,14 @@ angular.module('spatter.controllers', [])
     }
     $ionicScrollDelegate.scrollBottom(true);
   });
-})
 
-.controller('AccountCtrl', function($scope, Users) {
-  Users.getUser(1).then(function(response){
-    $scope.user = response;
-  });
-
-  $scope.settings = {
-    enableFriends: true
+  $scope.doRefresh = function() {
+    Games.getComments($stateParams.gameId).then(function(response){
+      $scope.comments = response;
+      $scope.$broadcast('scroll.refreshComplete');
+      if($scope.comments.length == 0){
+        $scope.noComments = true;
+      }
+    });
   };
 });

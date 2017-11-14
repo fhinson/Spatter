@@ -140,9 +140,8 @@ img.comment-avatar{
   color:white!important;
 }
 
-.vote-button.flagged{
-  background: red;
-  color:white!important;
+.flagged{
+  display: none;
 }
 
 .tally{

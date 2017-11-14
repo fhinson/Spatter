@@ -27,7 +27,7 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
   });
 })
 
-.constant('ServerUrl', 'http://spatter-api.dev')
+.constant('ServerUrl', 'http://spatter-api.herokuapp.com')
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -57,3 +57,15 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
   $urlRouterProvider.otherwise('/games');
 
 });
+
+// declare controllers module
+angular.module('spatter.controllers', []);
+
+// declare services module
+angular.module('spatter.services', []);
+
+// declare directives module
+angular.module('spatter.directives', []);
+
+// declare filters module
+angular.module('spatter.filters', []);

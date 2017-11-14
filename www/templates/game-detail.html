@@ -3,6 +3,8 @@
     <ion-content class="content-stable"
                  on-swipe-left="hideTime = false"
                  on-swipe-right="hideTime = true">
+      <ion-refresher on-refresh="doRefresh()">
+      </ion-refresher>
       <div class="loading" ng-show="!commentsLoaded">
         <ion-spinner></ion-spinner>
         <p>Loading Comments</p>
@@ -15,7 +17,7 @@
            ng-class="{other: comment.userId != myId}"
            class="comments">
 
-        <div class="comment">
+        <div class="comment" ng-class="isFlagged(comment)">
           <img class="comment-avatar" ng-src="{{getUserAvatar(comment)}}"/>
           <span class="comment-span" ng-style="{'background': getUserColor(comment)}">{{ comment.comment }}</span>
           <div class="actions">
@@ -25,8 +27,8 @@
           </div>
         </div>
 
-        <div class="time">{{comment.created_at | timeFormat}}</div>
-        <button ng-click="flagComment(comment)" ng-class="isFlagged(comment)" class="button button-stable vote-button"><icon class="ion-flag"></button>
+        <div class="time" ng-class="isFlagged(comment)">{{comment.created_at | timeFormat}}</div>
+        <button ng-class="isFlagged(comment)" ng-click="flagComment(comment)" class="button button-stable vote-button"><icon class="ion-flag"></button>
       </div>
 
     </ion-content>
