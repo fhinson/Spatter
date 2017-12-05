@@ -1,0 +1,58 @@
+<ion-view view-title="Welcome" can-swipe-back="false" hide-nav-bar="true" ng-controller="WelcomeCtrl">
+  <ion-content scroll="false" id="welcome-page">
+    <div id="welcome-start">
+      <button class="ion-arrow-left-c go-back" ng-click="goBack()"></button>
+      <div class="logo">
+        <img src="img/logo.svg"/>
+      </div>
+      <div class="button-section">
+        <button class="button button-block button-positive get-started-button" ng-click="getStarted()">Get Started</button>
+        <p class="login-trigger" ng-click="showLogin()">Already have an account? Log in.</p>
+      </div>
+      <div id="signup" ng-controller="RegistrationsCtrl">
+        <p class="s-guiding-text">Sign up with your email:</p>
+        <form ng-submit="signup()">
+          <div class="list list-inset slight-push">
+            <ion-item class="item item-input" ng-click="striggerItem()">
+              <input type="text" placeholder="Email" ng-model='data.email'>
+            </ion-item>
+            <ion-item class="item item-input" ng-hide="shouldHide">
+              <input type="password" placeholder="Password" ng-model='data.password'>
+            </ion-item>
+          </div>
+          <div class="padding s-hidden-field">
+            <button type="submit" class="button button-block button-positive welcome-button" ng-click="signup()" ng-switch="loadingSignup">
+              <span ng-switch-when="false">Sign Up</span>
+              <span ng-switch-default><ion-spinner id="spinner" class="welcome-loading-spinner" icon="ios"></ion-spinner></span>
+            </button>
+          </div>
+        </form>
+        <div class="legal-text">
+          <p>
+            By signing up you agree to our
+            <a href="#" onclick="window.open('#', '_blank', 'location=yes'); return false;">Terms of Service</a>
+          </p>
+        </div>
+      </div>
+      <div id="login" ng-controller="SessionsCtrl">
+        <p class="l-guiding-text">Log in with your email:</p>
+        <form ng-submit="login()">
+          <div class="list list-inset slight-push">
+            <ion-item class="item item-input" ng-click="ltriggerItem()">
+              <input type="text" placeholder="Email" ng-model="data.email" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+            </ion-item>
+            <ion-item class="item item-input" ng-hide="shouldHide">
+              <input type="password" placeholder="Password" ng-model='data.password'>
+            </ion-item>
+          </div>
+          <div class="padding l-hidden-field">
+            <button type="submit" class="button button-block button-positive welcome-button" ng-click="login()" ng-switch="loadingLogin">
+              <span ng-switch-when="false">Login</span>
+              <span ng-switch-default><ion-spinner id="spinner" class="welcome-loading-spinner" icon="ios"></ion-spinner></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

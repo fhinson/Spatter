@@ -1,6 +1,6 @@
-angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', 'spatter.filters', 'spatter.directives'])
+angular.module('spatter', ['ionic', 'ngResource', 'spatter.controllers', 'spatter.services', 'spatter.filters', 'spatter.directives'])
 
-.run(function($ionicPlatform, $http, $localstorage, $rootScope, ServerUrl, Games, Users) {
+.run(function($ionicPlatform, $http, $localstorage, $rootScope, ServerUrl) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -13,16 +13,6 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-
-    Users.getUser(1).then(function(response){
-      $localstorage.setObject('user', response);
-      $rootScope.$broadcast('userRetrieved', response);
-    });
-
-    Games.getAll().then(function(response){
-      $localstorage.setObject('games', response);
-      $rootScope.$broadcast('gamesRetrieved', response);
-    })
 
   });
 })
@@ -42,6 +32,11 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
     templateUrl: 'templates/tab-games.html',
     controller: 'GamesCtrl'
   })
+  .state('welcome', {
+    url: '/welcome',
+    templateUrl: 'templates/welcome.html',
+    controller: 'WelcomeCtrl'
+  })
   .state('game-detail', {
     url: '/games/:gameId',
     templateUrl: 'templates/game-detail.html',
@@ -54,7 +49,10 @@ angular.module('spatter', ['ionic', 'spatter.controllers', 'spatter.services', '
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/games');
+  $urlRouterProvider.otherwise(function($injector, $location) {
+    var $state = $injector.get('$state');
+    $state.go('welcome');
+  });
 
 });
 

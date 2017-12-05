@@ -5,7 +5,8 @@ angular.module('spatter.controllers')
   $scope.gamesLoaded = false;
   $scope.noGames = false;
 
-  $rootScope.$on('gamesRetrieved', function(event, response){
+  Games.getAll().then(function(response){
+    $localstorage.setObject('games', response);
     $scope.games = response;
     $scope.gamesLoaded = true;
     if($scope.games.length == 0){
@@ -13,9 +14,7 @@ angular.module('spatter.controllers')
     }
   });
 
-  $rootScope.$on('userRetrieved', function(event, response){
-    $scope.user = response;
-  });
+  $scope.user = $localstorage.get('User');
 
   $scope.remove = function(game) {
     Games.remove(game);

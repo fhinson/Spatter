@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="viewport-fit=cover, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title></title>
 
     <link rel="manifest" href="manifest.json">
@@ -17,6 +17,13 @@
     </script>-->
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <!-- animate.css -->
+    <link href="lib/animate.css" rel="stylesheet">
+
+    <!-- include jQuery-->
+    <script src="lib/jquery-1.11.2.min.js"></script>
+
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -28,6 +35,8 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
+    <!--Angular Resource -->
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
     <script src="lib/ionic-threads/ionic.threads.js"></script>
     <link href="lib/ionic-threads/ionic.threads.css" rel="stylesheet">
 
@@ -40,10 +49,15 @@
     <script src="js/services/localstorage.js"></script>
     <script src="js/services/users.js"></script>
     <script src="js/services/games.js"></script>
+    <script src="js/services/sessions.js"></script>
+    <script src="js/services/registrations.js"></script>
     <!-- controllers -->
     <script src="js/controllers/account.js"></script>
     <script src="js/controllers/games.js"></script>
     <script src="js/controllers/game-detail.js"></script>
+    <script src="js/controllers/welcome.js"></script>
+    <script src="js/controllers/sessions.js"></script>
+    <script src="js/controllers/registrations.js"></script>
     <!-- filters -->
     <script src="js/filters/games.js"></script>
     <!-- directives -->

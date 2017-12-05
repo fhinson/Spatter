@@ -1,12 +1,10 @@
 angular.module('spatter.controllers')
 
-.controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, $rootScope, Users, Games) {
+.controller('GameDetailCtrl', function($scope, $stateParams, $timeout, $ionicScrollDelegate, $localstorage, $rootScope, Users, Games) {
   $scope.game = Games.get($stateParams.gameId);
   console.log($scope.game);
-  // $scope.user = Users.get();
-  Users.getUser(1).then(function(response){
-    $scope.user = response;
-  });
+
+  $scope.user = JSON.parse($localstorage.get('User'));
 
   $scope.hideTime = false;
 
@@ -32,6 +30,10 @@ angular.module('spatter.controllers')
     "#34495E",
     "#8E44AD",
   ];
+
+  var updateLocalstorageUser = function(){
+    $localstorage.setObject('User', $scope.user);
+  }
 
   $scope.getUserAvatar = function(comment){
     var userIds = $scope.comments.map(a => a.user_id);
@@ -60,6 +62,8 @@ angular.module('spatter.controllers')
       created_at: d
     };
 
+    $scope.noComments = false;
+
     $scope.comments.push($scope.tempComment);
 
     Games.addComment($stateParams.gameId, $scope.user.id, $scope.data.comment).then(function(response){
@@ -87,6 +91,7 @@ angular.module('spatter.controllers')
       }
       Games.upvoteComment(comment, $scope.user);
     }
+    updateLocalstorageUser();
   }
 
   $scope.downvoteComment = function(comment){
@@ -106,6 +111,7 @@ angular.module('spatter.controllers')
       }
       Games.downvoteComment(comment, $scope.user);
     }
+    updateLocalstorageUser();
   }
 
   $scope.unUpvoteComment = function(comment){
@@ -115,6 +121,7 @@ angular.module('spatter.controllers')
       $scope.user.upvoted_comments.splice(index, 1);
     }
     Games.unUpvoteComment(comment, $scope.user);
+    updateLocalstorageUser();
   }
 
   $scope.unDownvoteComment = function(comment){
@@ -124,6 +131,7 @@ angular.module('spatter.controllers')
       $scope.user.downvoted_comments.splice(index, 1);
     }
     Games.unDownvoteComment(comment, $scope.user);
+    updateLocalstorageUser();
   }
 
   $scope.isUpvoted = function(comment){
@@ -145,6 +153,7 @@ angular.module('spatter.controllers')
       $scope.user.flagged_comments.push(comment.id);
     }
     Games.flagComment(comment, $scope.user);
+    updateLocalstorageUser();
   }
 
   $scope.isFlagged = function(comment){

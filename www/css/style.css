@@ -150,3 +150,429 @@ img.comment-avatar{
   color: gray;
 }
 
+@charset "UTF-8";
+@font-face {
+  font-family: 'DIN';
+  src: url("../lib/ionic/fonts/DIN/din-webfont.eot");
+  src: url("../lib/ionic/fonts/DIN/din-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/DIN/din-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/DIN/din-webfont.woff") format("woff"), url("../lib/ionic/fonts/DIN/din-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/DIN/din-webfont.svg#dinregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'DIN';
+  src: url("../lib/ionic/fonts/DIN/din_bold-webfont.eot");
+  src: url("../lib/ionic/fonts/DIN/din_bold-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/DIN/din_bold-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/DIN/din_bold-webfont.woff") format("woff"), url("../lib/ionic/fonts/DIN/din_bold-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/DIN/din_bold-webfont.svg#dinbold") format("svg");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'DIN';
+  src: url("../lib/ionic/fonts/DIN/din_light-webfont.eot");
+  src: url("../lib/ionic/fonts/DIN/din_light-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/DIN/din_light-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/DIN/din_light-webfont.woff") format("woff"), url("../lib/ionic/fonts/DIN/din_light-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/DIN/din_light-webfont.svg#din_lightregular") format("svg");
+  font-weight: light;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'DIN';
+  src: url("../lib/ionic/fonts/DIN/din_medium-webfont.eot");
+  src: url("../lib/ionic/fonts/DIN/din_medium-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/DIN/din_medium-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/DIN/din_medium-webfont.woff") format("woff"), url("../lib/ionic/fonts/DIN/din_medium-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/DIN/din_medium-webfont.svg#din_mediumregular") format("svg");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'SofiaPro';
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProRegular-webfont.eot");
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProRegular-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/SofiaPro/SofiaProRegular-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/SofiaPro/SofiaProRegular-webfont.woff") format("woff"), url("../lib/ionic/fonts/SofiaPro/SofiaProRegular-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/SofiaPro/SofiaProRegular-webfont.svg#dinregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'SofiaPro';
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProSemiBold-webfont.eot");
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProSemiBold-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/SofiaPro/SofiaProSemiBold-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/SofiaPro/SofiaProSemiBold-webfont.woff") format("woff"), url("../lib/ionic/fonts/SofiaPro/SofiaProSemiBold-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/SofiaPro/SofiaProSemiBold-webfont.svg#dinbold") format("svg");
+  font-weight: bold;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'SofiaPro';
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProLight-webfont.eot");
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProLight-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/SofiaPro/SofiaProLight-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/SofiaPro/SofiaProLight-webfont.woff") format("woff"), url("../lib/ionic/fonts/SofiaPro/SofiaProLight-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/SofiaPro/SofiaProLight-webfont.svg#din_lightregular") format("svg");
+  font-weight: light;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'SofiaPro';
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProMedium-webfont.eot");
+  src: url("../lib/ionic/fonts/SofiaPro/SofiaProMedium-webfont.eot?#iefix") format("embedded-opentype"), url("../lib/ionic/fonts/SofiaPro/SofiaProMedium-webfont.woff2") format("woff2"), url("../lib/ionic/fonts/SofiaPro/SofiaProMedium-webfont.woff") format("woff"), url("../lib/ionic/fonts/SofiaPro/SofiaProMedium-webfont.ttf") format("truetype"), url("../lib/ionic/fonts/SofiaPro/SofiaProMedium-webfont.svg#din_mediumregular") format("svg");
+  font-weight: 500;
+  font-style: normal; }
+
+.app-version {
+  font-size: 10px;
+  text-align: center;
+  margin: 0px auto;
+  color: #bcc5cb; }
+
+.settings-footer {
+  background-position: bottom !important; }
+
+.small-label,
+.small-label a {
+  font-size: 14px;
+  color: color("gray", 40);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 10px 0px; }
+
+h1.title {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px !important; }
+
+.button {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500; }
+
+.button-primary {
+  background: #5bc0de;
+  color: #fff; }
+
+.spinner.welcome-loading-spinner svg {
+  width: 20px;
+  height: 20px;
+  stroke: rgba(255, 255, 255, 0.8);
+  fill: rgba(255, 255, 255, 0.2);
+  border: none !important;
+  background: none !important;
+  position: relative;
+  top: 5px; }
+
+#dashboard {
+  background: #efefef; }
+
+.spatter-welcome {
+  background: #5bc0de !important;
+  padding: 20px !important; }
+  .spatter-welcome h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 20px; }
+  .spatter-welcome h3 {
+    color: #fff; }
+  .spatter-welcome p {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500; }
+
+.wrapping-list .item-content, .wrapping-list .item {
+  overflow: initial;
+  white-space: initial; }
+
+.card {
+  box-shadow: none !important; }
+  .card .item.item-avatar img {
+    border-radius: 0px; }
+  .card .item.item-avatar .insurance-type {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: gray; }
+  .card .item.item-avatar .policy-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: gray;
+    display: inline; }
+  .card .item.item-avatar h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 0px; }
+  .card .item.item-avatar p {
+    display: inline;
+    font-size: 14px;
+    font-weight: 500; }
+    .card .item.item-avatar p span {
+      font-size: 12px;
+      color: lightgray;
+      font-weight: 500; }
+
+.bottom-buttons {
+  margin: 0px !important;
+  height: 100%; }
+
+.bottom-buttons.w50 {
+  width: 50% !important; }
+
+.bottom-buttons.w33 {
+  width: 33.333333%; }
+
+.bottom-buttons:active {
+  background: #353535 !important; }
+
+.bottom-buttons button {
+  height: 100%; }
+
+.bottom-buttons button:active {
+  background: #353535 !important; }
+
+.bar-footer {
+  background: #525252;
+  background-image: none !important; }
+
+.bar.bar-footer-inner {
+  background: #525252;
+  /*height:12%!important;*/
+  padding: 0px !important;
+  height: 60px; }
+
+.footer-button {
+  font-size: 3.2vh !important;
+  border: none !important;
+  background: none !important;
+  color: #fff !important;
+  margin: 0px auto !important;
+  text-align: center !important;
+  display: block !important;
+  width: 100% !important;
+  opacity: 1 !important; }
+
+.settings-button {
+  color: #525252 !important;
+  font-size: 12px !important;
+  border: none !important;
+  background: none !important; }
+
+.close-button {
+  color: #525252 !important;
+  font-size: 12px !important;
+  border: none !important;
+  background: none !important; }
+
+h1.recommendation-title {
+  font-size: 24px;
+  margin-top: 0px;
+  margin-bottom: 20px; }
+
+p.recommendation-p {
+  color: #000 !important;
+  font-size: 15px !important; }
+
+.recommendation-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase; }
+  .recommendation-label.recommendation0 {
+    color: #26C281 !important; }
+  .recommendation-label.recommendation1 {
+    color: #F4D03F !important; }
+  .recommendation-label.recommendation2 {
+    color: #D91E18 !important; }
+
+.action-sheet, .action-sheet .action-sheet-options, .action-sheet .action-sheet-group {
+  font-family: -apple-system !important; }
+
+/* login */
+#welcome-page {
+  position: relative; }
+
+#welcome-start {
+  background: url("../img/bg.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  /*display: none;*/ }
+
+#welcome-start .logo {
+  padding-top: 50px;
+  display: none; }
+
+#welcome-start .logo img {
+  display: block;
+  margin: 0px auto;
+  width: 50%;
+  position: relative;
+  left: -1%; }
+
+#welcome-start .button-section {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 25px 20px;
+  display: none; }
+
+#welcome-start .button-section button {
+  margin-bottom: 15px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  background: #5bc0de;
+  font-weight: bold; }
+
+#welcome-start .button-section .login-trigger {
+  text-align: center;
+  color: #fefefe;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: -10px; }
+
+#login, #signup {
+  display: none;
+  -webkit-animation-duration: 0.2s;
+  -webkit-animation-delay: 0s;
+  animation-duration: 0.2s;
+  animation-delay: 0s; }
+
+.legal-text p {
+  text-align: center;
+  font-size: 12px;
+  color: #d2d8dc; }
+
+.legal-text a {
+  text-decoration: none;
+  color: #fa8d47;
+  font-weight: bold; }
+
+#welcome-start .logo, #welcome-start .button-section {
+  -webkit-animation-duration: 0.7s;
+  -webkit-animation-delay: 0s;
+  animation-duration: 0.7s;
+  animation-delay: 0s; }
+
+.go-back {
+  font-size: 30px !important;
+  border: none !important;
+  background: none !important;
+  opacity: 1 !important;
+  color: rgba(243, 245, 246, 0.8) !important;
+  margin: 0px auto !important;
+  padding: 0px !important;
+  padding-top: 10px !important;
+  padding-left: 0px !important;
+  margin-left: -10px !important;
+  -webkit-animation-duration: 0.15s !important;
+  -webkit-animation-delay: 0s !important;
+  animation-duration: 0.15s !important;
+  animation-delay: 0s !important;
+  height: 55px;
+  width: 70px;
+  display: none; }
+
+#login .list, #signup .list {
+  margin-top: 15px;
+  background-color: rgba(255, 255, 255, 0.4) !important; }
+
+#login .list .item, #signup .list .item {
+  /*border:none!important;*/
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  padding: 9px 20px;
+  background-color: rgba(255, 255, 255, 0.4) !important;
+  border: none !important; }
+
+#login .list .item input, #signup .list .item input {
+  color: #000 !important;
+  line-height: 25px !important;
+  text-shadow: none !important;
+  display: initial !important; }
+
+.s-guiding-text, .l-guiding-text {
+  color: #f3f5f6;
+  margin-bottom: 10px;
+  padding-left: 10px; }
+
+.l-guiding-text.extra, .s-guiding-text.extra {
+  margin-top: 20px; }
+
+.slight-push {
+  margin-top: 20px !important; }
+
+.l-facebook-button, .s-facebook-button {
+  margin-bottom: 30px !important;
+  border: none !important;
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  background: #3b5998 !important; }
+
+.l-facebook-button:active, .s-facebook-button:active {
+  opacity: 0.9; }
+
+.s-hidden-field, .l-hidden-field {
+  display: none;
+  -webkit-animation-duration: 0.15s !important;
+  -webkit-animation-delay: 0s !important;
+  animation-duration: 0.15s !important;
+  animation-delay: 0s !important; }
+
+.button.welcome-button {
+  background: #5bc0de !important;
+  border: none !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-size: 12px !important; }
+
+::-webkit-input-placeholder {
+  color: #979797 !important; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #979797 !important; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #979797 !important; }
+
+:-ms-input-placeholder {
+  color: #979797 !important; }
+
+.fb {
+  float: left;
+  font-size: 18px !important;
+  background: #5274bc;
+  width: 36px !important;
+  margin-left: -10px; }
+
+.popup-container .popup {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 2px !important;
+  color: #444f57 !important;
+  text-align: center !important; }
+
+.popup-head {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important; }
+
+.popup-head h3 {
+  color: #444f57 !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  letter-spacing: 1px !important; }
+
+.popup-buttons .button:last-child {
+  border: none !important;
+  text-transform: uppercase !important;
+  font-size: 12px !important;
+  letter-spacing: 1px !important;
+  background: #86bdd2 !important; }
+
+.spinner.welcome-loading-spinner svg {
+  width: 20px;
+  height: 20px;
+  stroke: rgba(255, 255, 255, 0.8);
+  fill: rgba(255, 255, 255, 0.2);
+  border: none !important;
+  background: none !important;
+  position: relative;
+  top: 5px; }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important; }
+
+
